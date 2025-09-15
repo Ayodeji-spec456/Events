@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHub - Event Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing/Auth Page -->
+    <div class="container" id="authContainer">
+        <div class="role-selector">
+            <div class="role-tabs">
+                <button class="role-tab active" data-role="attendee" onclick="switchRole('attendee')">Attendee</button>
+                <button class="role-tab" data-role="organizer" onclick="switchRole('organizer')">Organizer</button>
+                <button class="role-tab" data-role="admin" onclick="switchRole('admin')">Admin</button>
+            </div>
+        </div>
+
+        <div class="welcome-section attendee-theme" id="welcomeSection">
+            <h1>EventHub</h1>
+            <p id="welcomeText">Your gateway to amazing events. Discover and attend the best events in your area.</p>
+            <ul class="welcome-features" id="welcomeFeatures">
+                <li>Browse events by category and location</li>
+                <li>Get instant QR code tickets</li>
+                <li>Receive event updates and reminders</li>
+                <li>Build your event history</li>
+            </ul>
+        </div>
+
+        <div class="auth-section">
+            <div class="form-toggle">
+                <button class="toggle-btn active" onclick="showLogin()">Login</button>
+                <button class="toggle-btn" onclick="showRegister()">Register</button>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Login to EventHub</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="hidden">
+                <!-- Common fields -->
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required minlength="6">
+                </div>
+
+                <!-- Attendee specific fields (no additional fields) -->
+                <div class="role-specific-fields attendee-fields active">
+                    <!-- No additional fields for attendees -->
+                </div>
+
+                <!-- Organizer specific fields -->
+                <div class="role-specific-fields organizer-fields">
+                    <div class="form-group">
+                        <label for="organization">Organization/Company</label>
+                        <input type="text" id="organization" name="organization" placeholder="Your company or organization name">
+                    </div>
+                </div>
+
+                <!-- Admin specific fields -->
+                <div class="role-specific-fields admin-fields">
+                    <div class="form-group">
+                        <label for="employeeId">Employee ID</label>
+                        <input type="text" id="employeeId" name="employeeId" placeholder="Your employee ID">
+                    </div>
+                </div>
+
+                <input type="hidden" id="registerRole" value="attendee">
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard" id="dashboard">
+        <nav class="navbar">
+            <div class="nav-brand">EventHub</div>
+            <div class="nav-actions">
+                <span class="user-info" id="userInfo"></span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-content" id="dashboardContent">
+            <!-- Role-specific dashboard will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modalContainer"></div>
+
+    <!-- Core Scripts -->
+    <script src="auth.js"></script>
+    <script src="attendee-dashboard.js"></script>
+    <script src="organizer-dashboard.js"></script>
+    <script src="admin-dashborad.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
